@@ -1,23 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-<title>Volume of a Sphere</title>
-<style> 
-body{padding-top:30px;}
-label,input{display:block;} 
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sphere Volume Calculator</title>
 </head>
 <body>
-	<p>Input radius value and get the volume of a sphere.</p>
-	  <form id="sphereForm">
+    <h2>Sphere Volume Calculator</h2>
+    <form id="sphereForm">
         <label for="radius">Radius:</label>
         <input type="text" id="radius" required>
-        <button type="button" onclick="volume_sphere()">Calculate</button>
+        <button type="submit" id="submit">Calculate</button>
         <br><br>
         <label for="volume">Volume:</label>
         <input type="text" id="volume" readonly>
     </form>
-	<script type="text/javascript" src="./script.js"></script>
+
+    <script>
+        document.getElementById("sphereForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent page reload
+
+            let radiusInput = document.getElementById("radius").value;
+            let radius = parseFloat(radiusInput);
+
+            if (isNaN(radius) || radius < 0) {
+                document.getElementById("volume").value = "NaN";
+                return;
+            }
+
+            let volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+            document.getElementById("volume").value = volume.toFixed(4);
+        });
+    </script>
 </body>
 </html>
